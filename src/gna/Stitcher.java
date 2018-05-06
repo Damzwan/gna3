@@ -89,6 +89,7 @@ public class Stitcher {
     public void addNeighbors(Vertex vertex, int[][] image1, int[][] image2) {
         int x = vertex.getLoc().getX();
         int y = vertex.getLoc().getY();
+
         if (isNotOutOfBound(new Position(x + 1, y), image1[0].length - 1, image1.length - 1))
             vertex.addNeighbor(new Vertex(new Position(x + 1, y), vertex, image1[y][x + 1], image2[y][x + 1]));
         if (isNotOutOfBound(new Position(x, y + 1), image1[0].length - 1, image1.length - 1))
@@ -122,15 +123,13 @@ public class Stitcher {
      * to check whether your implementation does this properly.
      */
     public void floodfill(Stitch[][] mask) {
-        boolean isRight = false;
         for (int i = 0; i < mask.length; i++) {
+            boolean isRight = false;
             for (int j = 0; j < mask[0].length; j++) {
                 if (mask[i][j] == Stitch.SEAM) {
                     isRight = true;
-                    if (mask[i][j] != mask[mask.length - 1][mask[0].length - 1])
-                        j++;
                 }
-                if (isRight) mask[i][j] = Stitch.IMAGE2;
+                else if (isRight) mask[i][j] = Stitch.IMAGE2;
                 else mask[i][j] = Stitch.IMAGE1;
             }
         }
