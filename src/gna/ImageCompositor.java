@@ -5,6 +5,7 @@ import java.lang.Math;
 import libpract.*;
 
 public class ImageCompositor {
+
 	/** Squared Euclidean distance between pixel values x and y */
 	public static int pixelSqDistance(int x, int y)
 	{
