@@ -7,8 +7,8 @@ import java.util.List;
 
 public class Vertex {
     private Position loc;
-    private double cost;
-    private double minDist;
+    private int cost;
+    private int minDist;
     private Vertex prev;
     private List<Vertex> neighbors = new ArrayList<>();
 
@@ -28,19 +28,19 @@ public class Vertex {
         this.loc = loc;
     }
 
-    public double getCost() {
+    public int getCost() {
         return cost;
     }
 
-    public void setCost(double cost) {
+    public void setCost(int cost) {
         this.cost = cost;
     }
 
-    public double getMinDist() {
+    public int getMinDist() {
         return minDist;
     }
 
-    public void setMinDist(double minDist) {
+    public void setMinDist(int minDist) {
         this.minDist = minDist;
     }
 

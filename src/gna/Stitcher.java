@@ -59,13 +59,14 @@ public class Stitcher {
                     notVisited.add(neighbor);
                     v  = neighbor;
                 }
-                if (v.getCost() + top.getMinDist() <= neighbor.getMinDist()) {
+                if (v.getCost() + top.getMinDist() < v.getMinDist()) {
                     v.setMinDist(v.getCost() + top.getMinDist());
                     v.setPrev(top);
                 }
             }
         }
 
+        //find the lower right vertex
         Vertex last = null;
         for (Vertex v : visited) {
             if (v.getLoc().equals(new Position(image1[0].length - 1, image1.length - 1))) {
@@ -74,6 +75,7 @@ public class Stitcher {
             }
         }
 
+        //return a list of the path from the upper left to the lower right
         List<Position> line = new ArrayList<>();
         while (last != null) {
             line.add(0, last.getLoc());
