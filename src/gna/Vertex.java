@@ -10,7 +10,7 @@ public class Vertex {
     private int cost;
     private int minDist;
     private Vertex prev;
-    private List<Vertex> neighbors = new ArrayList<>();
+    private List<Position> neighborPositions = new ArrayList<>();
 
 
     public Vertex(Position loc, Vertex prev, int pixel1, int pixel2) {
@@ -52,11 +52,26 @@ public class Vertex {
         this.prev = prev;
     }
 
-    public List<Vertex> getNeighbors() {
-        return neighbors;
+    public List<Position> getNeighborPositions() {
+        return neighborPositions;
     }
 
-    public void addNeighbor(Vertex neighor){
-        neighbors.add(neighor);
+    public void addNeighbor(Position neighbor){
+        neighborPositions.add(neighbor);
+    }
+
+    public void setNeighborPositions(List<Position> neighborPositions) {
+        this.neighborPositions = neighborPositions;
+    }
+
+    @Override
+    public String toString() {
+        return "Vertex{" +
+                "loc=" + loc +
+                ", cost=" + cost +
+                ", minDist=" + minDist +
+                ", prev=" + prev +
+                ", neighborPositions=" + neighborPositions +
+                '}';
     }
 }
