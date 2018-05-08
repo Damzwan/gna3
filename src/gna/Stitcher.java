@@ -126,22 +126,11 @@ public class Stitcher {
      * to check whether your implementation does this properly.
      */
     public void floodfill(Stitch[][] mask) {
+
         Stack<Position> stack = new Stack<>();
-
-        Position start = new Position(0, 0);
-        boolean found = false;
-        for (int i = 0; i < mask.length; i++) {
-            for (int j = 0; j < mask[0].length; j++) {
-                if (canColor(mask, new Position(j, i))) {
-                    start = new Position(j, i);
-                    found = true;
-                    break;
-                }
-            }
-            if (found) break;
-        }
-
+        Position start = new Position(0, 1);
         stack.add(start);
+
         while (!stack.isEmpty()){
             Position curr = stack.pop();
             color(mask, curr);
@@ -155,6 +144,11 @@ public class Stitcher {
             pos = new Position(curr.getX(), curr.getY() - 1);
             if (canColor(mask, pos)) stack.add(pos);
         }
+        for (int i = 0; i < mask.length; i++) {
+            for (int j = 0; j < mask.length; j++) {
+                if (mask[i][j] == Stitch.EMPTY) mask[i][j] = Stitch.IMAGE2;
+            }
+        }
     }
 
     public boolean canColor(Stitch[][] mask, Position pos) {
@@ -162,15 +156,7 @@ public class Stitcher {
     }
 
     public void color(Stitch[][] mask, Position pos){
-        if (isLeft(mask, pos)) mask[pos.getY()][pos.getX()] = Stitch.IMAGE1;
-        else mask[pos.getY()][pos.getX()] = Stitch.IMAGE2;
-    }
-
-    public boolean isLeft(Stitch[][] mask, Position pos){
-        for (int i = pos.getX(); i < mask[0].length; i++) {
-            if (mask[pos.getY()][i] == Stitch.SEAM) return true;
-        }
-        return false;
+        mask[pos.getY()][pos.getX()] = Stitch.IMAGE1;
     }
 
     /**
